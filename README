@@ -1,0 +1,19 @@
+Sun Oct 23 16:42:18 2011
+MongoLab node.js Gratuitous 3D demo
+
+Demo for MongoLab and Joyent no.de and node.js appliance. Client side
+requires a WebGL browser.  The application is a 3D rendered room that
+allows guestbook functionality that scrolls guestbook entries up the
+screen. 
+
+Visit mongolab.com for more info.  
+
+Uses node.js and Mongoose for MongoDB connectivity.  Client uses GLGE
+framework for 3D world rendering.  
+
+Main server work is done in dispatch() in server.js
+
+Copyright 2011 ObjectLabs, Corp.
+
+See webroot/LICENSE for more Licensing information.
+

@@ -1,0 +1,40 @@
+<html><head> 
+ 
+ 
+<title>MongoLab no.de 3D demo</title> 
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+ 
+
+<script type="text/javascript" src="/glge-compiled-min.js"></script> 
+<style>
+body{background-color: #000;color: #fff;font-family:arial}
+</style>
+</head><body>
+
+<div id="dump"></div>
+
+<div>
+<div style="width:900px;margin:auto;position:relative" id="container">
+<canvas id="canvas" width="900" 
+height="500"></canvas>
+<div id="framerate" style="position:absolute; left: 750px; top: 20px; background-color: #000; opacity: 0.5;height: 30px; width: 130px; border-radius: 5px;	-moz-border-radius5px;-webkit-border-radius:5px;border: 1px solid #fff;">
+<div id="debug" style="padding: 5px"></div>
+</div>
+<div style="padding: 5px;position:absolute; left: 20px; top: 370px; background-color: #000; opacity: 0.5;height: 100px; width: 400px; border-radius: 5px;	-moz-border-radius5px;-webkit-border-radius:5px;border: 1px solid #fff;">
+<h2 style="margin:0;padding:0;padding-bottom: 5px;font-size: 20px">Gratuitous 3D MongoLab Joyent Demo </h2>
+<p style="margin:0;padding:0;padding-bottom: 5px;">Sign Guestbook: Type, press Return (20 char limit) :</p>
+<p style="margin:0;padding:0;padding-bottom: 5px;"><input type="text" onkeydown="event.stopPropagation();" value="" style="border:1px solid #888;width: 100%" onkeyup="this.value = processkey(event, this.value);" /></p>
+</div>
+</div>
+
+</div>
+
+
+<div id="debug2"></div>
+<script type="text/javascript" src="/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="/3dmongodemo.js"></script>
+<script type="text/javascript">
+doc.load("level.xml");
+</script>
+
+</body></html>
