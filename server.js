@@ -43,6 +43,15 @@ function startServer() {
 }
 
 //
+// Opens connection to MongoDB database, authenticates, logs successful connection.
+//
+function initializeDb() {
+    mongoose.connection.on("open", function() {
+	console.log("Connected to MongoDB successfully!");});
+    mongoose.connect("mongodb://" + loginCredentials + "@" + dbUrl + "/" + dbName);	  
+}
+
+//
 // serverCallback() is passed to http.createServer to be invoked each
 // time a new http request arrives.  Its two tasks are to log each
 // request to the console and to wrap the call to dispatch() with a
@@ -96,15 +105,6 @@ function insert (collectionIdent, json, callback) {
 		});
 }
 
-//
-// Opens connection to MongoDB database, authenticates, logs successful connection.
-//
-function initializeDb() {
-    mongoose.connection.on("open", function() {
-	console.log("Connected to MongoDB successfully!");});
-    mongoose.connect("mongodb://" + loginCredentials + "@" + dbUrl + "/" + dbName);	  
-}
-
 // 
 // Some meta-state for the application to track what entry we'll send.
 // Also used to detect when another entry has been added to the database. 
@@ -118,8 +118,8 @@ var currentEntry = 1;
 // insert, respectively, into the MongoDB database and then return an appopriate
 // result.  Other requests are compared against a list of allowed filenames and if
 // there is a match, the file is returned to the requester.  All other requests
-// return an error page or error code.  dispatch() is a callback function bound when
-// the http Server is initialized.
+// return an error page or error code.  dispatch() is called by the serverCallback()
+// function bound when the http Server is initialized.
 //
 function dispatch(req, res) {
     //some private methods
