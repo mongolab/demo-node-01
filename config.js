@@ -8,15 +8,15 @@
 //
 // THIS IS WHERE TO ADD MONGOLAB CONFIG INFO
 // exports.databaseUrl = "dbh<server>.mongolab.com:<port>";
-// exports.databaseName = "nodelove";
-// exports.username = "";
-// exports.password = "";
+// exports.databaseName = "<databasename>";
+// exports.username = "<username>";
+// exports.password = "<password>";
 //				
 // BELOW is to connect to locally running MongoDB server
-exports.username = "";
-exports.password = "";
 exports.databaseUrl = "localhost";
 exports.databaseName = "nodelove";
+exports.username = "";
+exports.password = "";
 
 //
 // allowedFiles: array of "inbound URL pathnames" mapped to allowed filenames to limit potentially malicious behaviors
