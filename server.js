@@ -10,8 +10,8 @@ var sys = require("sys");
 var fs = require("fs");
 var http = require("http");
 var url = require("url");
-var mongoose = require("mongoose");  
-var config = require("./config");   // config.js holds database parameters, 
+var mongoose = require("mongoose");
+var config = require("./config");   // config.js holds database parameters,
                                     // access credentials, allowed filenames
 
 // Some syntactic sugar for the config.js parameters.
@@ -20,7 +20,7 @@ var dbUrl = config.databaseUrl;
 var dbName = config.databaseName;
 var allowedFiles = config.allowedFiles;
 
-var portno = 80;		// The network port to listen on. 
+var portno = 80;		// The network port to listen on.
 
 //
 // Start running here.
@@ -33,7 +33,7 @@ startServer();			// Start the http server.
 //
 
 //
-// startServer() fires up an http server and sets it to listen 
+// startServer() fires up an http server and sets it to listen
 // on a network port (default is port 80).
 //
 function startServer() {
@@ -48,7 +48,7 @@ function startServer() {
 function initializeDb() {
     mongoose.connection.on("open", function() {
 	console.log("Connected to MongoDB successfully!");});
-    mongoose.connect("mongodb://" + loginCredentials + "@" + dbUrl + "/" + dbName);	  
+    mongoose.connect("mongodb://" + loginCredentials + "@" + dbUrl + "/" + dbName);
 }
 
 //
@@ -56,9 +56,9 @@ function initializeDb() {
 // time a new http request arrives.  Its two tasks are to log each
 // request to the console and to wrap the call to dispatch() with a
 // try/catch block that keeps the server running in the event of an
-// error. 
+// error.
 //
-function serverCallback(req, res) 
+function serverCallback(req, res)
 {
     try {
 	console.log("http request received from: " +
@@ -70,7 +70,7 @@ function serverCallback(req, res)
 	dispatch(req, res);
 
     } catch (err) {
-	// Something didn't work.  Send error back to http client. 
+	// Something didn't work.  Send error back to http client.
 	// Log error to console.  We don't terminate, so the server
 	// will keep processing instead of dying.
 	sys.puts(err);
@@ -105,9 +105,9 @@ function insert (collectionIdent, json, callback) {
 		});
 }
 
-// 
+//
 // Some meta-state for the application to track what entry we'll send.
-// Also used to detect when another entry has been added to the database. 
+// Also used to detect when another entry has been added to the database.
 //
 var maxEntry = 0;
 var currentEntry = 1;
@@ -127,18 +127,18 @@ function dispatch(req, res) {
 	res.writeHead(code, {"Content-Type": "text/plain"});
 	res.end(content);
     };
-    
+
     var renderHtml = function(content) {
 	res.writeHead(200, {"Content-Type": "text/html"});
 	res.end(content, "utf-8");
     };
-    
+
     var randomFromTo = function(from, to){
 	return Math.floor(Math.random() * (to - from + 1) + from);
     };
 
     var urlparts = url.parse(req.url);
-    
+
     // TODO validate req.url
     if (urlparts.pathname == "/getentry") {
 	// Query MongoLab
@@ -148,7 +148,7 @@ function dispatch(req, res) {
 		return;
 	    }
 	    if (maxEntry < docs.length) { // Someone added a guestbook entry since my last visit, start from top
-		currentEntry = maxEntry - 1; 
+		currentEntry = maxEntry - 1;
 		maxEntry = docs.length;
 	    } else {
 		currentEntry = currentEntry - 1;
@@ -161,7 +161,7 @@ function dispatch(req, res) {
 	var value = "";
 	var patt = /entry=/;
 	querystring.forEach(function (item) {
-	    if (patt.test(item)) { 
+	    if (patt.test(item)) {
 		value = item.replace(patt,"");
 		value = decodeURI (value);
 		value = value.replace(/\+/g," "); // TODO: better way to pass in " " in parameters like a post body.
@@ -177,10 +177,10 @@ function dispatch(req, res) {
 		}});
 	    renderHtml(value);
 	}
-	
+
     } else {			// Let's see if an allowFiles was requested.
 	var filen = allowedFiles[req.url];
-	if (filen == undefined) filen = "error.html"; // couldn't understand the pathname, send error.html 
+	if (filen == undefined) filen = "error.html"; // couldn't understand the pathname, send error.html
 	filen = "./webroot/" + filen;
 	console.log ("fetching: " + filen);
 
@@ -224,3 +224,4 @@ function printusage() {
     process.exit(1);
 }
 
+//I am so sorry! I just practice that how to use github.
